@@ -8,7 +8,7 @@ function pageInit() {
 	jQuery("#list2").jqGrid({
 		width:1000,
 		height:400,
-		url: '/customerManager/getCustomerList', //组件创建完成之后请求数据的url
+		url: '../data/JSONData', //组件创建完成之后请求数据的url
 		datatype: "json", //请求数据返回的类型。可选json,xml,txt
 		colNames: ['用户id', '姓名'],
 		colModel: [ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....

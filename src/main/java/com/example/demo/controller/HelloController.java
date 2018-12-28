@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HelloController {
     @RequestMapping("/index")
     private String index(){
-        return "/index.html";
+        return "/bigckbox.html";
     }
     @RequestMapping("/customerManager/dsfTestPurpose")
     private String dsfTestPurpose(){
