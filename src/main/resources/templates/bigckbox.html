@@ -14,20 +14,22 @@
             <i class="ace-icon fa fa-home home-icon"></i>
             <a href="#">主页</a>
         </li>
-        <li class="active">如何将第一列的checkbox放大</li>
+        <li class="active">checkbox放大</li>
     </ul>
     <!--replace page content-->
     <div class="col-xs-12" id="rp">
         <!-- PAGE CONTENT BEGINS -->
-        <div class="col-xs-6 midContent">
+        <div class="col-xs-9 midContent">
             <table id="list2"></table>
             <div id="pager2"></div>
         </div>
         <!-- PAGE CONTENT ENDS -->
     </div>
+
 </div>
 <!-- /.main_container -->
 <!-- /section:basics/navbar.layout -->
+
 <!-- basic scripts -->
 <div th:replace="common/common_body :: foot"></div>
 <script>
@@ -38,8 +40,8 @@
     function pageInit() {
         //创建jqGrid组件
         jQuery("#list2").jqGrid({
-            /*width:400,
-            height:400,*/
+            width:1000,
+            height:400,
             url: '../data/JSONData', //组件创建完成之后请求数据的url
             datatype: "json", //请求数据返回的类型。可选json,xml,txt
             colNames: ['用户id', '姓名'],
@@ -47,33 +49,30 @@
                 {
                     name: 'sno',
                     index: 'sno',
-                    width:400,
                 },
                 {
                     name: 'sname',
-                    index: 'sname',
-                    width:400,
+                    index: 'sno',
                 }
             ],
             rowNum: 10, //一页显示多少条（这个参数被传到后台）
             rowList: [10, 20, 30], //可供用户选择一页显示多少条（覆盖rowNum参数）
             pager: '#pager2', //表格页脚的占位符(一般是div)的id
-            sortname: 'sno', //初始化的时候排序的字段（传递到后台 sidx=sno）
+            sortname: 'CUSTOMER_ID', //初始化的时候排序的字段（传递到后台 sidx=sno）
             sortorder: "desc", //排序方式,可选desc,asc
             mtype: "get", //向后台请求数据的ajax的类型。可选post,get
             viewrecords: true, //总记录数
-            caption: "例子", //表格的标题名字
-            altRows: true,//交替变色
-            multiselect: true,//checkbox（多选）
-            multiboxonly: true,
+            caption: "客户信息", //表格的标题名字
+            altRows: true,
+            multiselect: true,//复选框
             emptyrecords: "没有记录", //当返回的数据行数为0时显示的信息（viewrecords : true）
             loadComplete: function() {
                 var table = this;
                 setTimeout(function () {
                     updatePagerIcons(table)
                 },0);
-                // $('#' + $(table).attr("id")+ ' tr td:first').css("width", "50px");
-                // $('#' + $(table).attr("id")+ '_cb').css("width", "50px");
+                $('#' + $(table).attr("id")+ ' tr td:first').css("width", "190px");
+                $('#' + $(table).attr("id")+ '_cb').css("width", "190px");
             },
         });
         function updatePagerIcons(table) {
@@ -87,6 +86,7 @@
             $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function(){
                 var icon = $(this);
                 var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+
                 if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
             })
         }
